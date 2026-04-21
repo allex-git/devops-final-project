@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f2c930f (p1_add_python_app)
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -205,3 +209,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+<<<<<<< HEAD
+=======
+=======
+__pycache__/
+*.py[codz]
+>>>>>>> c900f4c (p1_add_python_app)
+>>>>>>> f2c930f (p1_add_python_app)
