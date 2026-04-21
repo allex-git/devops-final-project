@@ -1,7 +1,8 @@
 # Devops Final Project
 DevOps Final Project: Python (FastAPI) + Docker + Kubernetes + AWS EKS + ArgoCD
 
-# DevOps Final Project — Крок 01 (Python App)
+
+# Крок 01 (Python App)
 
 ## опис
 це простий backend-сервіс на Python, створений з використанням FastAPI.
@@ -16,6 +17,7 @@ DevOps Final Project: Python (FastAPI) + Docker + Kubernetes + AWS EKS + ArgoCD
 ## структура проєкту
 ```
 .
+├── Dockerfile
 └── app/
     ├── main.py
     └── requirements.txt
@@ -44,7 +46,7 @@ uvicorn main:app --host 0.0.0.0 --port 8800
 
 ---
 
-## доступні endpoint-и
+## доступні endpoint
 
 ### `GET /`
 повертає інформацію про сервіс:
@@ -96,3 +98,89 @@ curl http://localhost:8800/healthz
 - Сервіс слухає `0.0.0.0` 
 
 ---
+
+
+# Крок 02 (Docker)
+
+## опис
+На цьому етапі додаток був контейнеризований з використанням Docker.
+
+Контейнер:
+- використовує мінімальний офіційний образ Python
+- встановлює залежності
+- запускає FastAPI backend
+
+---
+
+## Dockerfile
+
+```dockerfile
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+COPY app/requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app/ .
+
+RUN useradd -m appuser
+USER appuser
+
+EXPOSE 8800
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8800"]
+```
+
+---
+
+
+## збірка контейнера
+
+```bash
+docker build -t fastapi-app .
+```
+
+---
+
+## запуск контейнера
+
+```bash
+docker run -p 8800:8800 fastapi-app
+```
+
+---
+
+## перевірка роботи
+
+```bash
+curl http://localhost:8800/
+curl http://localhost:8800/healthz
+```
+
+---
+
+## результат
+
+Сервіс доступний за адресою:
+
+http://localhost:8800
+
+---
+
+## офіційна документація
+
+- https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+- https://hub.docker.com/_/python
+- https://fastapi.tiangolo.com/deployment/docker/
+
+---
+
+## примітки
+
+- порт 8800 використовується для контейнера
+- сервіс слухає 0.0.0.0
