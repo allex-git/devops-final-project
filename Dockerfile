@@ -8,9 +8,6 @@ ENV PYTHONUNBUFFERED=1
 # 3. Рабочая директория
 WORKDIR /app
 
-# 4. Установка зависимостей (минимально)
-RUN apt-get update && apt-get install -y --no-install-recommends && rm -rf /var/lib/apt/lists/*
-
 # 5. Копируем зависимости (для кеша)
 COPY app/requirements.txt .
 
@@ -20,8 +17,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 7. Копируем код
 COPY app/ .
 
+LABEL maintainer="AllexDevOps"
+LABEL project="Final-Project"
+LABEL description="Final Project"
 # 8. Non-root пользователь (security best practice)
-RUN useradd -m appuser
+RUN useradd -m appuser && chown -R appuser:appuser /app
 USER appuser
 
 # 9. Порт

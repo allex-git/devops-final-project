@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: alexdevops05/finalproject:latest
+          tags: alexdevops05/final-project:latest
