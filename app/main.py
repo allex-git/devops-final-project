@@ -1,15 +1,20 @@
-# from fastapi import FastAPI
-# import socket
+from fastapi import FastAPI
+import socket
+from datetime import datetime, timezone
 
-# app = FastAPI()
+app = FastAPI()
 
-# def get_host_info():
-#     hostname = socket.gethostname()
-#     try:
-#         ip = socket.gethostbyname(hostname)
-#     except Exception:
-#         ip = "unknown"
-#     return hostname, ip
+START_TIME = datetime.now(timezone.utc)
+
+
+def get_host_info():
+    hostname = socket.gethostname()
+    try:
+        ip = socket.gethostbyname(hostname)
+    except Exception:
+        ip = "unknown"
+    return hostname, ip
+
 
 
 # @app.get("/")
