@@ -1,0 +1,13 @@
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hostname: argocd.allex-devops.devops11.test-danit.com
+    annotations:
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      external-dns.alpha.kubernetes.io/hostname: argocd.allex-devops.devops11.test-danit.com
+    tls: false
+
+configs:
+  params:
+    server.insecure: true
